@@ -5,14 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JoshsContactsApp"
         mc:Ignorable="d"
-        Title="Josh's Contacts App" Height="450" Width="800">
+        Title="Josh's Note Taking App" Height="450" Width="800" MinWidth="707" MinHeight="467" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="14*"></ColumnDefinition>
+            <ColumnDefinition Width="79*"/>
+            <ColumnDefinition Width="10*"></ColumnDefinition>
+            <ColumnDefinition Width="291*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="26*"></RowDefinition>
+            <RowDefinition Height="157*"/>
+            <RowDefinition Height="34*"/>
         </Grid.RowDefinitions>
+        
+        <Menu Grid.ColumnSpan="5" Height="20" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New"/>
+                <MenuItem Header="Open"/>
+                <MenuItem Header="Save"/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+        </Menu>
+
+        <Menu Grid.Column="3" Grid.Row="1" Height="20" VerticalAlignment="Top">
+            <MenuItem Header="i"></MenuItem>
+            <MenuItem Header="Ckear"></MenuItem>
+        </Menu>
+        
+        <TextBox x:Name="txtContactInfo" Grid.Row="1" Grid.Column="3" Margin="0 20 0 0"></TextBox>
+        <ListBox x:Name="listContacts" Grid.Row="1" Grid.Column="1"></ListBox>
+        <Button x:Name="btnAdd" Content="+" Grid.Column="1" Grid.Row="2" Height="30" Width="50" Margin="0 0 80 0"></Button>
+        <Button x:Name="btnRemove" Content="-" IsEnabled="False" Grid.Column="1" Grid.Row="2" Height="30" Width="50" Margin="80 0 0 0"></Button>
+        <Button x:Name="btnUpdate" Content="Update Note" IsEnabled="False" Grid.Column="3" Grid.Row="2" Height="50" Width="100"></Button>
     </Grid>
 </Window>

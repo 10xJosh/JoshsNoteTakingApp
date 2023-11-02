@@ -23,6 +23,7 @@ namespace JoshsContactsApp
 		public MainWindow()
 		{
 			InitializeComponent();
+			listNotes.Items.Add("Test");
 		}
 	}
 }

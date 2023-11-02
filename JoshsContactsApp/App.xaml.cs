@@ -14,7 +14,6 @@ namespace JoshsContactsApp
 	public partial class App : Application
 	{
 		private static string databaseName = "contacts.db";
-		private static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-		public static string databasePath = System.IO.Path.Combine(folderPath, databaseName);
+		public static string dbFile = System.IO.Path.Combine(Environment.CurrentDirectory, "notesDb.db3");
 	}
 }

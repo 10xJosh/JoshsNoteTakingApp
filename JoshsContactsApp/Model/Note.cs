@@ -11,7 +11,9 @@ namespace JoshsContactsApp.Model
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        [MaxLength(100)]
         public string Title { get; set; }
         public string? Notes { get; set; }
+        public string FileLocation { get; set; }
     }
 }

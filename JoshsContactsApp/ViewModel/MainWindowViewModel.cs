@@ -1,7 +1,9 @@
 ﻿using JoshsContactsApp.Model;
+using JoshsNoteTakingApp.ViewModel.Commands;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -13,21 +15,34 @@ namespace JoshsContactsApp.ViewModel
 {
 	class MainWindowViewModel : INotifyPropertyChanged
 	{
-		private string Title;
+		public ObservableCollection<Note> Notes { get; set; }
+		private Note selectedNote { get; set; }
 
-		public string Query
+		public Note SelectedNote
 		{
-			get { return Title; }
+			get { return selectedNote; }
 			set 
-			{
-				OnPropertyChanged("Query"); 
+			{ 
+				selectedNote = value; 
+				//TODO: get notes
 			}
 		}
+
+		#region ViewModel Commands
+		public AddNoteCommand AddNoteCommand { get; set; }
+		public DelNoteCommand DelNoteCommand { get; set; }
+		#endregion
 
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 
-		private void OnPropertyChanged(string propertyName)
+        public MainWindowViewModel()
+        {
+			AddNoteCommand = new AddNoteCommand(this);
+			DelNoteCommand = new DelNoteCommand(this);
+        }
+
+        private void OnPropertyChanged(string propertyName)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
@@ -39,7 +54,7 @@ namespace JoshsContactsApp.ViewModel
 			return notes;
 		}
 
-		private void test()
+		public void test()
 		{
 			MessageBox.Show("Yeeahw");
 		}

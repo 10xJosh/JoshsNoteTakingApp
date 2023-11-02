@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JoshsContactsApp"
+        xmlns:ViewModel="clr-namespace:JoshsContactsApp.ViewModel"
         mc:Ignorable="d"
         Title="Josh's Note Taking App" Height="450" Width="800" MinWidth="707" MinHeight="467" 
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Window.Resources>
+        <ViewModel:MainWindowViewModel x:Key="vm"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource vm}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="14*"></ColumnDefinition>
             <ColumnDefinition Width="79*"/>
@@ -32,13 +36,15 @@
 
         <Menu Grid.Column="3" Grid.Row="1" Height="20" VerticalAlignment="Top">
             <MenuItem Header="i"></MenuItem>
-            <MenuItem Header="Ckear"></MenuItem>
+            <MenuItem Header="Clear"></MenuItem>
         </Menu>
         
-        <TextBox x:Name="txtContactInfo" Grid.Row="1" Grid.Column="3" Margin="0 20 0 0"></TextBox>
-        <ListBox x:Name="listContacts" Grid.Row="1" Grid.Column="1"></ListBox>
-        <Button x:Name="btnAdd" Content="+" Grid.Column="1" Grid.Row="2" Height="30" Width="50" Margin="0 0 80 0"></Button>
-        <Button x:Name="btnRemove" Content="-" IsEnabled="False" Grid.Column="1" Grid.Row="2" Height="30" Width="50" Margin="80 0 0 0"></Button>
+        <TextBox x:Name="txtNoteInfo" Grid.Row="1" Grid.Column="3" Margin="0 20 0 0"></TextBox>
+        <ListView x:Name="listNotes" Grid.Row="1" Grid.Column="1">
+            
+        </ListView>
+        <Button x:Name="btnAdd" Content="+" Command="{Binding Source={StaticResource vm}, Path=AddNoteCommand}" CommandParameter="{Binding ElementName=btnAdd, Path=Content}" Grid.Column="1" Grid.Row="2" Height="30" Width="50" Margin="0 0 80 0"></Button>
+        <Button x:Name="btnRemove" Content="-" Command="{Binding Source={StaticResource vm}, Path=DelNoteCommand}" CommandParameter="{Binding ElementName=listNotes, Path=SelectedItem}" Grid.Column="1" Grid.Row="2" Height="30" Width="50" Margin="80 0 0 0"></Button>
         <Button x:Name="btnUpdate" Content="Update Note" IsEnabled="False" Grid.Column="3" Grid.Row="2" Height="50" Width="100"></Button>
     </Grid>
 </Window>

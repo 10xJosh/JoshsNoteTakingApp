@@ -1,4 +1,5 @@
-﻿using JoshsContactsApp.ViewModel;
+﻿using JoshsContactsApp.Model;
+using JoshsContactsApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace JoshsNoteTakingApp.ViewModel.Commands
 
 		public void Execute(object? parameter)
 		{
-            VM.test();
+            VM.CreateNote();
         }
 	}
 }

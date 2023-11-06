@@ -11,6 +11,8 @@
     <Window.Resources>
         <ViewModel:MainWindowViewModel x:Key="vm"/>
     </Window.Resources>
+    
+    
     <Grid DataContext="{StaticResource vm}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="14*"></ColumnDefinition>
@@ -27,10 +29,20 @@
         
         <Menu Grid.ColumnSpan="5" Height="20" VerticalAlignment="Top">
             <MenuItem Header="File">
-                <MenuItem Header="New"/>
+                <MenuItem Header="New Note"
+                          Command="{Binding AddNoteCommand}"
+                          />
                 <MenuItem Header="Open"/>
                 <MenuItem Header="Save"/>
-                <MenuItem Header="Exit"/>
+                <Separator/>
+                <MenuItem Header="Exit"
+                          Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Delete Note"
+                          Command="{Binding DelNoteCommand}"
+                          CommandParameter="{Binding SelectedNote}"
+                          />
             </MenuItem>
         </Menu>
 

@@ -1,4 +1,5 @@
-﻿using JoshsContactsApp.ViewModel;
+﻿using JoshsContactsApp.Model;
+using JoshsContactsApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,19 @@ namespace JoshsNoteTakingApp.ViewModel.Commands
 
         public bool CanExecute(object? parameter)
 		{
-			return true;
+			Note SelectedNote = parameter as Note;
+			if (SelectedNote != null)
+			{
+				return true;
+			}
+			
+			return false;
 		}
 
 		public void Execute(object? parameter)
 		{
+			Note SelectedNote = parameter as Note;
+
 			MessageBoxResult dialogResult = MessageBox.Show("Are you sure you want to delete this entry?", "Delete Entry?"
 				, MessageBoxButton.YesNo, MessageBoxImage.Warning);
 

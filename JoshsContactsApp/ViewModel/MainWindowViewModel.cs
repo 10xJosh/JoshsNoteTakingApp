@@ -1,5 +1,6 @@
 ﻿using JoshsContactsApp.Model;
 using JoshsNoteTakingApp.ViewModel.Commands;
+using JoshsNoteTakingApp.ViewModel.Helper;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,17 @@ namespace JoshsContactsApp.ViewModel
         private void OnPropertyChanged(string propertyName)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		public void CreateNote()
+		{
+			Note newNote = new Note()
+			{
+				Title = "New note",
+				Notes = ""
+			};
+
+			DataBaseHelper.Insert<Note>(newNote);
 		}
 
 		public static List<Note> GetNotes()

@@ -25,5 +25,10 @@ namespace JoshsContactsApp
 			InitializeComponent();
 			listNotes.Items.Add("Test");
 		}
+
+		private void Exit_Click(object sender, RoutedEventArgs e)
+		{
+			Application.Current.Shutdown();
+		}
 	}
 }

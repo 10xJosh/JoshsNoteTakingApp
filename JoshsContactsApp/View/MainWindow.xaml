@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="Josh's Note Taking App" Height="450" Width="800" MinWidth="707" MinHeight="467" 
         WindowStartupLocation="CenterScreen">
+    
     <Window.Resources>
         <ViewModel:MainWindowViewModel x:Key="vm"/>
     </Window.Resources>
@@ -39,6 +40,11 @@
                           Click="Exit_Click"/>
             </MenuItem>
             <MenuItem Header="Edit">
+                <MenuItem Header="Edit Note"
+                          Command="{Binding EditNoteNameCommand}"
+                          CommandParameter="{Binding SelectedNote}"
+                          />
+                <Separator/>
                 <MenuItem Header="Delete Note"
                           Command="{Binding DelNoteCommand}"
                           CommandParameter="{Binding SelectedNote}"
@@ -46,17 +52,29 @@
             </MenuItem>
         </Menu>
 
-        <Menu Grid.Column="3" Grid.Row="1" Height="20" VerticalAlignment="Top">
-            <MenuItem Header="i"></MenuItem>
-            <MenuItem Header="Clear"></MenuItem>
+        <Menu Grid.Column="3" Grid.Row="1" Height="25" VerticalAlignment="Top" FontSize="15">
+            <MenuItem Header="i" FontStyle="Italic"></MenuItem>
+            <MenuItem x:Name="btnBold" Header="B" FontWeight="Bold"
+                      Click="btnBold_Click"
+                      />
         </Menu>
-        
-        <TextBox x:Name="txtNoteInfo" Grid.Row="1" Grid.Column="3" Margin="0 20 0 0"></TextBox>
-        <ListView x:Name="listNotes" Grid.Row="1" Grid.Column="1">
-            
+
+        <RichTextBox x:Name="richTxtBoxContent" Grid.Row="1" Grid.Column="3" Margin="0 25 0 0"
+                     ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     />
+        <ListView x:Name="listNotes" Grid.Row="1" Grid.Column="1"
+                  SelectedItem="{Binding SelectedNote, Mode=TwoWay}"
+                  ItemsSource="{Binding Notes}"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <Button x:Name="btnAdd" Content="+" Command="{Binding Source={StaticResource vm}, Path=AddNoteCommand}" CommandParameter="{Binding ElementName=btnAdd, Path=Content}" Grid.Column="1" Grid.Row="2" Height="30" Width="50" Margin="0 0 80 0"></Button>
         <Button x:Name="btnRemove" Content="-" Command="{Binding Source={StaticResource vm}, Path=DelNoteCommand}" CommandParameter="{Binding ElementName=listNotes, Path=SelectedItem}" Grid.Column="1" Grid.Row="2" Height="30" Width="50" Margin="80 0 0 0"></Button>
-        <Button x:Name="btnUpdate" Content="Update Note" IsEnabled="False" Grid.Column="3" Grid.Row="2" Height="50" Width="100"></Button>
+        <Button x:Name="btnUpdate" Content="Update Note" IsEnabled="False" Grid.Column="3" Grid.Row="2" Height="50" Width="100"/>
+        <TextBlock x:Name="txtBlockContentAmount" Grid.Column="3" Grid.Row="3" Text="Note Length: 0 characters" Height="20" Width="220" HorizontalAlignment="Right" VerticalAlignment="Top"/>
     </Grid>
 </Window>

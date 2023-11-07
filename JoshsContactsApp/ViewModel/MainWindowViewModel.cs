@@ -24,14 +24,15 @@ namespace JoshsContactsApp.ViewModel
 			get { return selectedNote; }
 			set 
 			{ 
-				selectedNote = value; 
-				//TODO: get notes
+				selectedNote = value;
+				OnPropertyChanged("SelectedNote");
 			}
 		}
 
 		#region ViewModel Commands
 		public AddNoteCommand AddNoteCommand { get; set; }
 		public DelNoteCommand DelNoteCommand { get; set; }
+		public EditNoteNameCommand EditNoteNameCommand { get; set; }
 		#endregion
 
 
@@ -41,6 +42,10 @@ namespace JoshsContactsApp.ViewModel
         {
 			AddNoteCommand = new AddNoteCommand(this);
 			DelNoteCommand = new DelNoteCommand(this);
+			EditNoteNameCommand = new EditNoteNameCommand(this);
+
+			Notes = new ObservableCollection<Note>();
+			GetNotes();
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -57,18 +62,33 @@ namespace JoshsContactsApp.ViewModel
 			};
 
 			DataBaseHelper.Insert<Note>(newNote);
+
+			GetNotes();
 		}
 
-		public static List<Note> GetNotes()
+		private void GetNotes()
 		{
-			List<Note> notes = new List<Note>();
+			var notes = DataBaseHelper.Read<Note>();
 
-			return notes;
+			Notes.Clear();
+
+			foreach (var note in notes)
+			{
+				Notes.Add(note);
+			}
 		}
 
-		public void test()
+		public void DeleteNote(Note note)
 		{
-			MessageBox.Show("Yeeahw");
+			DataBaseHelper.Delete<Note>(note);
+
+			GetNotes();
+		}
+
+		public void UpdateNote(Note note)
+		{
+			DataBaseHelper.Update<Note>(note);
+			GetNotes();
 		}
     }
 }

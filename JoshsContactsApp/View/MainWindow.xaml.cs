@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JoshsNoteTakingApp.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,12 +24,19 @@ namespace JoshsContactsApp
 		public MainWindow()
 		{
 			InitializeComponent();
-			listNotes.Items.Add("Test");
 		}
 
 		private void Exit_Click(object sender, RoutedEventArgs e)
 		{
 			Application.Current.Shutdown();
+		}
+
+		private void btnBold_Click(object sender, RoutedEventArgs e)
+		{
+			if (richTxtBoxContent.Selection.GetPropertyValue(Run.FontWeightProperty) is FontWeight && ((FontWeight)richTxtBoxContent.Selection.GetPropertyValue(Run.FontWeightProperty)) == FontWeights.Normal)
+				richTxtBoxContent.Selection.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Bold);
+			else
+				richTxtBoxContent.Selection.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Normal);
 		}
 	}
 }

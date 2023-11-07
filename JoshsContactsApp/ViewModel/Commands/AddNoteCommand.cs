@@ -15,7 +15,11 @@ namespace JoshsNoteTakingApp.ViewModel.Commands
 	internal class AddNoteCommand : ICommand
 	{
         public MainWindowViewModel VM { get; set; }
-        public event EventHandler? CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value;}
+        }
 
         public AddNoteCommand(MainWindowViewModel VM)
         {

@@ -41,7 +41,7 @@ namespace JoshsNoteTakingApp.ViewModel.Commands
 
 			if(dialogResult == MessageBoxResult.Yes)
 			{
-				MessageBox.Show("Deleted");
+				VM.DeleteNote(SelectedNote);
 			}
 			else
 			{

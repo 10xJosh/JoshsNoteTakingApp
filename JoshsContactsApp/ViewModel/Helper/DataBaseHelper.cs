@@ -23,8 +23,6 @@ namespace JoshsNoteTakingApp.ViewModel.Helper
                 {
                     result = true;
                 }
-
-
             }
 
             return result;
@@ -69,7 +67,7 @@ namespace JoshsNoteTakingApp.ViewModel.Helper
 			return result;
 		}
 
-		public static List<T> Read<T>(T item) where T : new()
+		public static List<T> Read<T>() where T : new()
 		{
 			List<T> list;
 

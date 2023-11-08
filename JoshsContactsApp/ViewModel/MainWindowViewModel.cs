@@ -35,6 +35,30 @@ namespace JoshsContactsApp.ViewModel
 		public EditNoteNameCommand EditNoteNameCommand { get; set; }
 		#endregion
 
+		#region Other options
+		private bool isSpellCheckEnabled = true;
+		public bool IsSpellCheckEnabled
+		{
+			get 
+			{ 
+				return isSpellCheckEnabled;
+			}
+			set
+			{
+				if(isSpellCheckEnabled != true) 
+				{
+					isSpellCheckEnabled = true;
+					isSpellCheckEnabled = value;
+				}
+				else if(isSpellCheckEnabled != false)
+				{
+					isSpellCheckEnabled = false;
+					isSpellCheckEnabled = value;
+				}
+				OnPropertyChanged("IsSpellCheckEnabled");
+			}
+		} 
+		#endregion
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 

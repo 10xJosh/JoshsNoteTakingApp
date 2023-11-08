@@ -60,8 +60,6 @@ namespace JoshsNoteTakingApp.ViewModel.Helper
 				{
 					result = true;
 				}
-
-
 			}
 
 			return result;

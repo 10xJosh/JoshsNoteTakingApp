@@ -40,11 +40,16 @@
                           Click="Exit_Click"/>
             </MenuItem>
             <MenuItem Header="Edit">
+                <MenuItem Header="Spell Checking" IsCheckable="True"
+                          IsChecked="{Binding IsSpellCheckEnabled}"
+                          Checked="spellChecker_Checked"
+                          Unchecked="spellChecker_Unchecked"
+                          />
+                <Separator/>
                 <MenuItem Header="Edit Note"
                           Command="{Binding EditNoteNameCommand}"
                           CommandParameter="{Binding SelectedNote}"
                           />
-                <Separator/>
                 <MenuItem Header="Delete Note"
                           Command="{Binding DelNoteCommand}"
                           CommandParameter="{Binding SelectedNote}"
@@ -53,14 +58,20 @@
         </Menu>
 
         <Menu Grid.Column="3" Grid.Row="1" Height="25" VerticalAlignment="Top" FontSize="15">
-            <MenuItem Header="i" FontStyle="Italic"></MenuItem>
+            <MenuItem x:Name="btnItalic" Header="i" FontStyle="Italic"
+                      Click="btnItalic_Click"
+                      />
             <MenuItem x:Name="btnBold" Header="B" FontWeight="Bold"
                       Click="btnBold_Click"
+                      />
+            <ComboBox x:Name="cmboxFonts"
+                      
                       />
         </Menu>
 
         <RichTextBox x:Name="richTxtBoxContent" Grid.Row="1" Grid.Column="3" Margin="0 25 0 0"
                      ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     SpellCheck.IsEnabled="{Binding IsSpellCheckEnabled}" 
                      />
         <ListView x:Name="listNotes" Grid.Row="1" Grid.Column="1"
                   SelectedItem="{Binding SelectedNote, Mode=TwoWay}"

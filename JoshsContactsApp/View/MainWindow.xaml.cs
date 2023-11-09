@@ -27,8 +27,6 @@ namespace JoshsContactsApp
 			InitializeComponent();
 		}
 
-		
-
 		private void Exit_Click(object sender, RoutedEventArgs e)
 		{
 			Application.Current.Shutdown();
@@ -50,14 +48,6 @@ namespace JoshsContactsApp
 				richTxtBoxContent.Selection.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Normal);
 		}
 
-		private void spellChecker_Checked(object sender, RoutedEventArgs e)
-		{
 
-		}
-
-		private void spellChecker_Unchecked(object sender, RoutedEventArgs e)
-		{
-
-		}
 	}
 }

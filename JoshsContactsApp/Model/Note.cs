@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JoshsContactsApp.Model
 {
-    class Note
+    public class Note
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

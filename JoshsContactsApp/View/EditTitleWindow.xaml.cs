@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JoshsContactsApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,13 @@ namespace JoshsNoteTakingApp.View
 		{
 			InitializeComponent();
 		}
-	}
+
+        public EditTitleWindow(Note note)
+        {
+            InitializeComponent();
+			txtNewTitle.Text = note.Title;
+		}
+
+		
+    }
 }

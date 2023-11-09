@@ -3,16 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModel="clr-namespace:JoshsNoteTakingApp.ViewModel.EditWindow_Commands"
         xmlns:local="clr-namespace:JoshsNoteTakingApp.View"
         mc:Ignorable="d"
         WindowStyle="SingleBorderWindow"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         Title="Change Note Title" Height="150" Width="300">
-    
-    <StackPanel Margin="15">
-        <TextBlock Text="Enter a new Name" HorizontalAlignment="Center"/>
-        <TextBox x:Name="txtNewTitle" Text="New Note" Margin="5"/>
-        <Button x:Name="btnChangeName" Content="Change Title" Margin="5"/>
+
+    <Window.Resources>
+        <ViewModel:EditTitleWindowViewModel x:Key="vm"/>
+    </Window.Resources>
+
+
+    <StackPanel Margin="15" DataContext="{StaticResource vm}">
+        <TextBlock Text="Enter a new Name:" HorizontalAlignment="Center"/>
+        <TextBox x:Name="txtNewTitle" Text="" Margin="5"/>
+        <Button x:Name="btnChangeName" Command="{Binding ChangeNameCommand}" 
+                CommandParameter="{Binding ElementName=txtNewTitle}" 
+                Content="Change Title" Margin="5"
+                />
     </StackPanel>
 </Window>

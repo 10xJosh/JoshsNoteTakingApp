@@ -40,9 +40,14 @@ namespace JoshsNoteTakingApp.ViewModel.Commands
 
 		public void Execute(object? parameter)
 		{
-			EditTitleWindow editTitleWindow = new EditTitleWindow();
+			var note = parameter as Note;
 
-			editTitleWindow.Show();
+			if (note != null)
+			{
+				EditTitleWindow editTitleWindow = new EditTitleWindow(note);
+
+				editTitleWindow.Show();
+			}
 		}
 	}
 }

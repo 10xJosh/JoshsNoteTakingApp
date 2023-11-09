@@ -42,8 +42,6 @@
             <MenuItem Header="Edit">
                 <MenuItem Header="Spell Checking" IsCheckable="True"
                           IsChecked="{Binding IsSpellCheckEnabled}"
-                          Checked="spellChecker_Checked"
-                          Unchecked="spellChecker_Unchecked"
                           />
                 <Separator/>
                 <MenuItem Header="Edit Note"

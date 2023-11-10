@@ -17,9 +17,9 @@
 
 
     <StackPanel Margin="15" DataContext="{StaticResource vm}">
-        <TextBlock Text="Enter a new Name:" HorizontalAlignment="Center"/>
-        <TextBox x:Name="txtNewTitle" Text="" Margin="5"/>
-        <Button x:Name="btnChangeName" Command="{Binding ChangeNameCommand}" 
+        <TextBlock Text="Enter a new note title:" HorizontalAlignment="Center"/>
+        <TextBox x:Name="txtNewTitle" Text="{Binding Title}" Margin="5"/>
+        <Button x:Name="btnChangeName" Click="btnChangeName_Click" Command="{Binding ChangeNameCommand}" 
                 CommandParameter="{Binding ElementName=txtNewTitle}" 
                 Content="Change Title" Margin="5"
                 />

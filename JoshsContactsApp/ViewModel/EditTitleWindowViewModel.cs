@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JoshsNoteTakingApp.ViewModel.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -34,5 +35,6 @@ namespace JoshsNoteTakingApp.ViewModel.EditWindow_Commands
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+
 	}
 }

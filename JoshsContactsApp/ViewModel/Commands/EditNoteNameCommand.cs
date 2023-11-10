@@ -45,8 +45,9 @@ namespace JoshsNoteTakingApp.ViewModel.Commands
 			if (note != null)
 			{
 				EditTitleWindow editTitleWindow = new EditTitleWindow(note);
+				editTitleWindow.ShowDialog();
 
-				editTitleWindow.Show();
+				VM.GetNotes();
 			}
 		}
 	}

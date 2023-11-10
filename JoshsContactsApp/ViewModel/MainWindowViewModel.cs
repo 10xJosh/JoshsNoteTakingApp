@@ -90,7 +90,7 @@ namespace JoshsContactsApp.ViewModel
 			GetNotes();
 		}
 
-		private void GetNotes()
+		public void GetNotes()
 		{
 			var notes = DataBaseHelper.Read<Note>();
 

@@ -1,4 +1,5 @@
 ﻿using JoshsContactsApp.Model;
+using JoshsNoteTakingApp.ViewModel.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace JoshsNoteTakingApp.View
 	/// </summary>
 	public partial class EditTitleWindow : Window
 	{
+		public Note Note { get; set; }
+		
 		public EditTitleWindow()
 		{
 			InitializeComponent();
@@ -28,9 +31,15 @@ namespace JoshsNoteTakingApp.View
         public EditTitleWindow(Note note)
         {
             InitializeComponent();
+			Note = note;
 			txtNewTitle.Text = note.Title;
 		}
 
-		
-    }
+		private void btnChangeName_Click(object sender, RoutedEventArgs e)
+		{
+			Note.Title = txtNewTitle.Text;
+			DataBaseHelper.Update(Note);
+			Close();
+		}
+	}
 }

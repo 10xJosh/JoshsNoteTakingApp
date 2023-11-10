@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JoshsNoteTakingApp.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,13 @@ namespace JoshsNoteTakingApp.ViewModel.EditWindow_Commands
 	class ChangeNameCommand : ICommand
 	{
 		public EditTitleWindowViewModel VM { get; set; }
-		public event EventHandler? CanExecuteChanged;
+		public event EventHandler? CanExecuteChanged
+		{
+			add { CommandManager.RequerySuggested += value; }
+			remove { CommandManager.RequerySuggested -= value; }
+		}
 
-        public ChangeNameCommand(EditTitleWindowViewModel VM)
+		public ChangeNameCommand(EditTitleWindowViewModel VM)
         {
             this.VM = VM;
         }
@@ -23,7 +28,7 @@ namespace JoshsNoteTakingApp.ViewModel.EditWindow_Commands
 		{
 			var textBlock = parameter as TextBox;
 
-			if (textBlock != null && string.IsNullOrEmpty(textBlock.Text)) 
+			if (textBlock != null && !string.IsNullOrEmpty(textBlock.Text)) 
 			{
 				return true;
 			}
@@ -33,7 +38,7 @@ namespace JoshsNoteTakingApp.ViewModel.EditWindow_Commands
 
 		public void Execute(object? parameter)
 		{
-			MessageBox.Show("It works!");
+			return;
 		}
 	}
 }

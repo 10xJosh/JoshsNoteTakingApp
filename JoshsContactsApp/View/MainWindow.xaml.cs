@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -34,20 +35,71 @@ namespace JoshsContactsApp
 
 		private void btnBold_Click(object sender, RoutedEventArgs e)
 		{
-			if (richTxtBoxContent.Selection.GetPropertyValue(Run.FontWeightProperty) is FontWeight && ((FontWeight)richTxtBoxContent.Selection.GetPropertyValue(Run.FontWeightProperty)) == FontWeights.Normal)
-				richTxtBoxContent.Selection.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Bold);
+			bool isButtonEnabled = (sender as ToggleButton).IsChecked ?? false;
+
+			if (isButtonEnabled)
+			{
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.FontWeightProperty, FontWeights.Bold);
+			}
 			else
-				richTxtBoxContent.Selection.ApplyPropertyValue(Run.FontWeightProperty, FontWeights.Normal);
+			{
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.FontWeightProperty, FontWeights.Normal);
+			}
 		}
 
 		private void btnItalic_Click(object sender, RoutedEventArgs e)
 		{
-			if (richTxtBoxContent.Selection.GetPropertyValue(Run.FontStyleProperty) is FontStyle && ((FontStyle)richTxtBoxContent.Selection.GetPropertyValue(Run.FontStyleProperty)) == FontStyles.Normal)
-				richTxtBoxContent.Selection.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Italic);
+			bool isButtonEnabled = (sender as ToggleButton).IsChecked ?? false;
+
+			if (isButtonEnabled)
+			{
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.FontStyleProperty, FontStyles.Italic);
+			}
 			else
-				richTxtBoxContent.Selection.ApplyPropertyValue(Run.FontStyleProperty, FontStyles.Normal);
+			{
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.FontStyleProperty, FontStyles.Normal);
+			}
 		}
 
+		private void btnUnderline_Click(object sender, RoutedEventArgs e)
+		{
+			bool isButtonEnabled = (sender as ToggleButton).IsChecked ?? false;
 
+			if (isButtonEnabled)
+			{
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Underline);
+			}
+			else
+			{
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Baseline);
+			}
+		}
+
+		private void btnStrikeThrough_Click(object sender, RoutedEventArgs e)
+		{
+			bool isButtonEnabled = (sender as ToggleButton).IsChecked ?? false;
+
+			if (isButtonEnabled)
+			{
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Strikethrough);
+			}
+			else
+			{
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Baseline);
+			}
+		}
+
+		private void richTxtBoxContent_SelectionChanged(object sender, RoutedEventArgs e)
+		{
+			//Checking if Bold button is enabled 
+			var selectedWeight = richTxtBoxContent.Selection.GetPropertyValue(FontWeightProperty);
+			btnBold.IsChecked = (selectedWeight != DependencyProperty.UnsetValue) && (selectedWeight.Equals(FontWeights.Bold));
+
+			//Checking if StrikeThrough button is enabled 
+			//var strikeThroughSelected = richTxtBoxContent.Selection.GetPropertyValue(TextDecorations);
+
+			//Checking if Underline button is enabled 
+			//var selectedUnderline = richTxtBoxContent.Selection.GetPropertyValue(I)
+		}
 	}
 }

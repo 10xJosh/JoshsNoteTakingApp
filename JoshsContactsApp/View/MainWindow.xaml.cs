@@ -71,7 +71,10 @@ namespace JoshsContactsApp
 			}
 			else
 			{
-				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Baseline);
+				TextDecorationCollection textDecorations;
+
+				(richTxtBoxContent.Selection.GetPropertyValue(Inline.TextDecorationsProperty) as TextDecorationCollection).TryRemove(TextDecorations.Underline, out textDecorations);
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, textDecorations);
 			}
 		}
 
@@ -85,21 +88,29 @@ namespace JoshsContactsApp
 			}
 			else
 			{
-				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, TextDecorations.Baseline);
+				TextDecorationCollection textDecorations;
+
+				(richTxtBoxContent.Selection.GetPropertyValue(Inline.TextDecorationsProperty) as TextDecorationCollection).TryRemove(TextDecorations.Strikethrough, out textDecorations);
+				richTxtBoxContent.Selection.ApplyPropertyValue(Inline.TextDecorationsProperty, textDecorations);
 			}
 		}
 
 		private void richTxtBoxContent_SelectionChanged(object sender, RoutedEventArgs e)
 		{
-			//Checking if Bold button is enabled 
+			//Checking if buttons are enabled and if not updated them
 			var selectedWeight = richTxtBoxContent.Selection.GetPropertyValue(FontWeightProperty);
 			btnBold.IsChecked = (selectedWeight != DependencyProperty.UnsetValue) && (selectedWeight.Equals(FontWeights.Bold));
 
+			var selectedStyle = richTxtBoxContent.Selection.GetPropertyValue(Inline.FontStyleProperty);
+			btnItalic.IsChecked = (selectedStyle != DependencyProperty.UnsetValue) && (selectedStyle.Equals(FontStyles.Italic));
+
 			//Checking if StrikeThrough button is enabled 
-			//var strikeThroughSelected = richTxtBoxContent.Selection.GetPropertyValue(TextDecorations);
+			var selectedUnderlineStyle = richTxtBoxContent.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+			btnUnderline.IsChecked = (selectedUnderlineStyle != DependencyProperty.UnsetValue) && (selectedUnderlineStyle.Equals(TextDecorations.Underline));
 
 			//Checking if Underline button is enabled 
-			//var selectedUnderline = richTxtBoxContent.Selection.GetPropertyValue(I)
+			var selectedStrikeThrough = richTxtBoxContent.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+			btnStrikeThrough.IsChecked = (selectedUnderlineStyle != DependencyProperty.UnsetValue) && (selectedUnderlineStyle.Equals(TextDecorations.Strikethrough));
 		}
 	}
 }
